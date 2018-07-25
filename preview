@@ -1,0 +1,38 @@
+1. CONFIGURANDO ACESSO SSH NO VIRTUALBOX VIA NAT
+
+Por deafult a interface virtual que se encontra em modo NAT no Virtualbox, geralmenteo, o IP da máquina virtual será 10.0.2.15. 
+Para chegar até sua máquina virtual, acessando a sua máquina física (hospedeiro), faremos a seguinte configuração: 
+
+Acesse as opções de sua: VM → Dispositivos → Rede → Redirecionamento de Portas 
+
+Coloque a seguinte configuração:
+Endereço IP do hospedeiro:  127.0.1.1
+Porta do hospedeiro:        2222
+IP do host (virtual):       10.0.2.15
+Porta do host (virtual):    22
+
+Antes tenha certeza de que o serviço do ssh está rodando na sua VM. Para isso digite:
+# apt-get install ssh ( Estamos falando do Debian 9 )
+
+Após a instalação inicie o serviço:
+# service sshd start
+
+Verifique se o ssh está rodando:
+# netstat -nla
+
+Abra o putty e digite o ip 127.0.1.1 porta 22 e voilá!
+
+==========================================================================================================================================
+2. Instalando o Elasticsearch
+
+Antes de tudo verifique o seguinte checklist para saber se a sua máquina está pronta para instalar o Elasticsearch + Kibana
+
+  * Verifique as Rotas 
+    # route -n
+  * Verifique o Firewall -> Seja cauteloso com as regras existentes. Não permita que um node fique exposto para a Internet!!!
+    Olhe o git Ryanthegiantlion/createfirewallrules_restrictive.sh
+  * Verifique o DNS
+  * Instale o Java ( sem ele seu Elasticsearch não irá funcionar adequadamente ).
+
+======= Em atualização =====
+  
